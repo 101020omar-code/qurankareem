@@ -13,6 +13,9 @@ export function rewardFor(adsWatched: number): number {
   return pkg ? pkg.credits : 0;
 }
 
+/** Credits granted automatically when the navigation reward video is watched. */
+export const NAV_VIDEO_REWARD = 5;
+
 /** Interstitial frequency cap: every 5th page change, at least 3 minutes apart. */
 export const INTERSTITIAL_EVERY = 5;
 export const INTERSTITIAL_MIN_GAP_MS = 3 * 60 * 1000;
