@@ -8,3 +8,13 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+## Rules
+
+- Illuminated Book answers via server-only AI SDK Responses drawing on well-known Islamic scholarship, attributing non-bundled claims by book name; only bundled excerpts are shown as verified references, so the app never displays unverifiable source text.
+- Keep the Illuminated Book video area explicitly unavailable until the user's video is supplied; never simulate playback, answers, or rewarded-ad credits.
+
+- Fonts must be bundled locally through `@fontsource*` packages imported in `src/styles.css`; never load them from a remote font CDN — the app has to render correctly with no internet.
+- Qibla uses north-referenced device orientation only, requests sensor permission from a user action, and rotates the dial and needle with continuous angles to avoid false bearings and full-turn jumps.
+
+- Android packaging uses Capacitor with server.url pointing at the hosted app, because AI answers rely on server functions that cannot run inside a static Android bundle.
