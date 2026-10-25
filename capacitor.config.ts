@@ -6,8 +6,7 @@ const config: CapacitorConfig = {
   webDir: "dist/client",
   server: {
     // The app uses server functions (AI answers), so the Android shell loads the hosted app.
-    // Replace with the published URL before releasing.
-    url: "https://id-preview--3b96406e-b4a3-4945-8e8b-1588a7a18415.lovable.app?forceHideBadge=true",
+    url: "https://id-preview--5662eb05-d26a-475c-821e-a00991de0356.lovable.app?forceHideBadge=true",
     cleartext: true,
   },
   android: {
