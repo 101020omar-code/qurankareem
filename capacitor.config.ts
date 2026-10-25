@@ -16,9 +16,9 @@ const config: CapacitorConfig = {
     Admob: {
       // Publisher app ID provided by the user (2026-10-25).
       appID: "ca-app-pub-4072506919111365~3383451970",
-      // Ad unit IDs in src/quran/lib/ads.ts are still Google's TEST ids;
-      // set this to false together with real ad unit ids before release.
-      initializeForTesting: true,
+    // Ad unit IDs in src/quran/lib/ads.ts are the user's real ids (2026-10-25);
+    // live ads, so initializeForTesting is false.
+    initializeForTesting: false,
     },
   },
 };
