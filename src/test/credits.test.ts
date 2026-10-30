@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { START_CREDITS, afterQuestion, canAsk, rewardFor, shouldShowInterstitial } from "@/quran/lib/credits";
+import { NAV_VIDEO_REWARD, VIDEO_START_MAX_WAIT_MS, afterQuestion, canAsk, canShowInterstitial, canShowNavVideo, rewardFor } from "@/quran/lib/credits";
 
 describe("illuminated book credits", () => {
   it("starts with 100 credits", () => expect(START_CREDITS).toBe(100));
