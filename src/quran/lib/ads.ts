@@ -1,12 +1,11 @@
 import { Capacitor } from "@capacitor/core";
-import { NAV_VIDEO_REWARD, VIDEO_START_MAX_WAIT_MS, canShowInterstitial, canShowNavVideo, loadCredits, saveCredits } from "./credits";
+import { canShowInterstitial } from "./credits";
 
 // Real AdMob unit ids supplied by the user (2026-10-25). Live ads, not test ads.
 export const AD_IDS = {
   banner: "ca-app-pub-4072506919111365/9417628859",
   interstitial: "ca-app-pub-4072506919111365/6316822793",
   rewarded: "ca-app-pub-4072506919111365/4165302170",
-  navRewarded: "ca-app-pub-4072506919111365/4460815640",
 };
 const TESTING = false;
 
@@ -32,44 +31,18 @@ export async function setBanner(visible: boolean) {
   } catch { /* ad failed; app keeps working */ }
 }
 
-let navCount = 0;
 let lastInterstitial = 0;
-let lastVideoAt = 0;
-let lastVideoNav = 0;
 export async function onPageChange() {
   if (!adsAvailable()) return;
-  navCount++;
-  const now = Date.now();
   // Image interstitial: at most once every 4 minutes.
-  if (canShowInterstitial(lastInterstitial, now)) {
+  if (canShowInterstitial(lastInterstitial, Date.now())) {
     try {
       await init();
-      const { AdMob, InterstitialAdPluginEvents } = await lib();
+      const { AdMob } = await lib();
       await AdMob.prepareInterstitial({ adId: AD_IDS.interstitial, isTesting: TESTING });
-      // Wait until the interstitial is dismissed so the reward video starts after it —
-      // but never longer than 5 seconds.
-      const dismissed = new Promise<void>((resolve) => {
-        let h: { remove: () => Promise<void> } | null = null;
-        const done = () => { h?.remove().catch(() => {}); resolve(); };
-        AdMob.addListener(InterstitialAdPluginEvents.Dismissed, done).then((handle) => { h = handle; });
-        setTimeout(done, VIDEO_START_MAX_WAIT_MS);
-      });
       await AdMob.showInterstitial();
-      await dismissed;
       lastInterstitial = Date.now();
     } catch { /* no interstitial available */ }
-  }
-  // Rewarded video on navigation: after 3 navigations once the 4 minutes passed; +5 credits.
-  if (canShowNavVideo(navCount - lastVideoNav, lastVideoAt, now)) {
-    lastVideoAt = now;
-    lastVideoNav = navCount;
-    try {
-      await init();
-      if (await playRewarded(AD_IDS.navRewarded)) {
-        const n = loadCredits() + NAV_VIDEO_REWARD;
-        saveCredits(n);
-      }
-    } catch { /* no reward video available */ }
   }
 }
 
