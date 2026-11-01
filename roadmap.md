@@ -1,5 +1,7 @@
 # Tasks
 
+- [x] Prepare Android packaging: android platform added, launcher icons + adaptive icon + splash from the user's green Quran Kareem logo, app name "تقوى القلوب", favicon, ANDROID-BUILD.md guide. Blocked item: `server.url` in capacitor.config.ts must be swapped to the published URL after the user publishes (preview URLs need a Lovable login and break the APK).
+
 - [ ] Build the Illuminated Book question page and answer view without credits or ads.
 - [ ] Connect real AI answers to local religious source excerpts and display references and a disclaimer.
 - [ ] Verify the real question-to-answer flow and mobile layout.
