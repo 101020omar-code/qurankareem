@@ -11,8 +11,9 @@ const config: CapacitorConfig = {
   appName: "تقوى القلوب",
   webDir: "dist/client",
   server: {
-    // TODO: replace with the published URL once the app is published.
-    url: "https://id-preview--5662eb05-d26a-475c-821e-a00991de0356.lovable.app?forceHideBadge=true",
+    // Published (public) URL of the app — preview URLs require a Lovable login
+    // and would break the APK. Update only to a published URL, then `npm run cap:sync`.
+    url: "https://open-door-web-foundation.lovable.app?forceHideBadge=true",
     cleartext: true,
   },
   android: {
